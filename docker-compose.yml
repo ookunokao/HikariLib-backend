@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: build/Dockerfile
     volumes:
-      - ./:/var/www/hikarilib-api
+      - ./:/go/src/github.com/yuminekosan/HikariLib-backend
     ports:
       - "8001:8000"
     depends_on:
@@ -19,11 +19,12 @@ services:
     restart: unless-stopped
     image: postgres:13-alpine
     volumes:
-      - ./.database/postgres/data:/var/lib/pgsql/hikarilib/data
+      - .:/var/lib/hikarilib
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - PGDATA=var/lib/hikarilib/pgdata
     ports:
       - ${DB_PORT}:5432
 

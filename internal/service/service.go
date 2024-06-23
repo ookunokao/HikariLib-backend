@@ -1,6 +1,6 @@
 package service
 
-import "github.com/yuminekosan/HikariLib-backend/pkg/repository"
+import "github.com/yuminekosan/HikariLib-backend/internal/repository"
 
 type Authorization interface {
 }

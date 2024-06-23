@@ -2,7 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/yuminekosan/HikariLib-backend/pkg/service"
+	"github.com/yuminekosan/HikariLib-backend/internal/service"
 )
 
 type Routes struct {
