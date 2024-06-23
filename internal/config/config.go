@@ -20,8 +20,8 @@ type DB struct {
 	Host    string `env:"DB_HOST" env-default:"localhost"`
 	Port    string `env:"DB_PORT" env-default:"5432"`
 	Name    string `env:"DB_NAME" env-default:"postgres"`
-	User    string `env:"DB_USER" env-default:"postgres"`
-	Pass    string `env:"DB_PASS" env-default:"postgres"`
+	User    string `env:"DB_USERNAME" env-default:"postgres"`
+	Pass    string `env:"DB_PASSWORD" env-default:"postgres"`
 	SslMode string `env:"DB_SSL_MODE" env-default:"false"`
 }
 

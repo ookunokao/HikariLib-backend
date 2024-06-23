@@ -2,13 +2,14 @@ package repository
 
 import (
 	"fmt"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/jmoiron/sqlx"
-	"github.com/yuminekosan/HikariLib-backend/internal/config"
+	"github.com/yuminekosan/hikariLibBackend/internal/config"
 )
 
 func NewPostgresDb(cnf config.Config) (*sqlx.DB, error) {
-	db, err := sqlx.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
-		cnf.Host, cnf.Port, cnf.User, cnf.Name, cnf.Pass, cnf.SslMode))
+	db, err := sqlx.Open("pgx", fmt.Sprintf("%s://%s:%s@%s:%s/%s?sslmode=%s",
+		cnf.Service, cnf.User, cnf.Pass, cnf.Host, cnf.Port, cnf.Name, cnf.SslMode))
 	if err != nil {
 		return nil, err
 	}

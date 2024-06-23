@@ -1,12 +1,13 @@
 package main
 
 import (
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/spf13/viper"
-	HikariLib_backend "github.com/yuminekosan/HikariLib-backend"
-	"github.com/yuminekosan/HikariLib-backend/internal/config"
-	"github.com/yuminekosan/HikariLib-backend/internal/controller"
-	"github.com/yuminekosan/HikariLib-backend/internal/repository"
-	"github.com/yuminekosan/HikariLib-backend/internal/service"
+	hikarilibbackend "github.com/yuminekosan/hikariLibBackend"
+	"github.com/yuminekosan/hikariLibBackend/internal/config"
+	"github.com/yuminekosan/hikariLibBackend/internal/controller"
+	"github.com/yuminekosan/hikariLibBackend/internal/repository"
+	"github.com/yuminekosan/hikariLibBackend/internal/service"
 	"log/slog"
 	"os"
 )
@@ -20,7 +21,6 @@ const (
 func main() {
 	cnf := config.MustLoad()
 	log := setupLogger(cnf.Env)
-	log.Info("pizda")
 	// todo: add slog-log and remake all logs after for slog
 	db, err := repository.NewPostgresDb(cnf)
 	if err != nil {
@@ -29,7 +29,7 @@ func main() {
 	rep := repository.NewRepository(db)
 	services := service.NewService(rep)
 	routes := controller.NewRoutes(services)
-	srv := new(HikariLib_backend.Server)
+	srv := new(hikarilibbackend.Server)
 	if err := srv.Run(viper.GetString("port"), routes.InitRoutes()); err != nil {
 		log.Error("Error starting server: %s", err.Error())
 	}

@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: build/Dockerfile
     volumes:
-      - ./:/go/src/github.com/yuminekosan/HikariLib-backend
+      - ./:/go/src/github.com/yuminekosan/hikariLibBackend
     ports:
       - "8001:8000"
     depends_on:
