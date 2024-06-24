@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: build/Dockerfile
+#      target: dev
+    command: "go run /go/src/github.com/yuminekosan/hikariLibBackend/cmd/main.go"
     volumes:
       - ./:/go/src/github.com/yuminekosan/hikariLibBackend
     ports:

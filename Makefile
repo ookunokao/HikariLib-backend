@@ -5,7 +5,6 @@ endif
 
 migrate-create:
 	@docker exec -it hikarilib-api migrate create -ext sql -dir ./migrations -seq $(name)
-	@docker cp hikarilib-api:/go/migrations/. ./migrations
 migrate-up:
 	migrate -path ./migrations -database "$(DB_SERVICE)://$(DB_USERNAME):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" up
 migrate-down:
