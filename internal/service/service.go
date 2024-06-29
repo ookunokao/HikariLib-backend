@@ -1,8 +1,12 @@
 package service
 
-import "github.com/yuminekosan/hikariLibBackend/internal/repository"
+import (
+	hikarilibbackend "github.com/yuminekosan/hikariLibBackend"
+	"github.com/yuminekosan/hikariLibBackend/internal/repository"
+)
 
 type Authorization interface {
+	CreateUser(User hikarilibbackend.User) (int, error)
 }
 
 type TodoList interface {
@@ -17,5 +21,7 @@ type Service struct {
 }
 
 func NewService(rep *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Authorization: NewAuthService(rep.Authorization),
+	}
 }

@@ -1,8 +1,12 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/jmoiron/sqlx"
+	hikarilibbackend "github.com/yuminekosan/hikariLibBackend"
+)
 
 type Authorization interface {
+	CreateUser(User hikarilibbackend.User) (int, error)
 }
 
 type TodoList interface {
@@ -17,5 +21,7 @@ type Repository struct {
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
-	return &Repository{}
+	return &Repository{
+		Authorization: NewAuthRepository(db),
+	}
 }

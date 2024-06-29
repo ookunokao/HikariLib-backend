@@ -2,7 +2,6 @@ package main
 
 import (
 	_ "github.com/jackc/pgx/v5/stdlib"
-	"github.com/spf13/viper"
 	hikarilibbackend "github.com/yuminekosan/hikariLibBackend"
 	"github.com/yuminekosan/hikariLibBackend/internal/config"
 	"github.com/yuminekosan/hikariLibBackend/internal/controller"
@@ -30,7 +29,7 @@ func main() {
 	services := service.NewService(rep)
 	routes := controller.NewRoutes(services)
 	srv := new(hikarilibbackend.Server)
-	if err := srv.Run(viper.GetString("port"), routes.InitRoutes()); err != nil {
+	if err := srv.Run("8001", routes.InitRoutes()); err != nil {
 		log.Error("Error starting server: %s", err.Error())
 	}
 }
